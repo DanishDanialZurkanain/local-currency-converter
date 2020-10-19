@@ -24,9 +24,9 @@
             </div>
           </div>
           <div class="my-3">
-            <b-alert v-if="result" class="text-center" variant="info" show>{{
-              result
-            }}</b-alert>
+            <b-alert v-if="result" class="text-center" variant="info" show
+              >{{ result_currency }} {{ result }}</b-alert
+            >
           </div>
           <b-button @click="calculate" block variant="outline-primary"
             >Calculate</b-button
@@ -43,30 +43,46 @@ export default {
     return {
       amount: "",
       result: "",
+      result_currency: "",
       cur_to: [
         {
           value: null,
           text: "Please Select",
         },
         {
-          value: 0.33,
-          text: "SGD",
+          value: {
+            currency: 0.33,
+            label: "SGD",
+          },
+          text: "Singapore",
         },
         {
-          value: 3547.39,
-          text: "IDR",
+          value: {
+            currency: 3547.39,
+            label: "IDR",
+          },
+          text: "Indonesia",
         },
         {
-          value: 25.46,
-          text: "JPY",
+          value: {
+            currency: 25.46,
+            label: "JPY",
+          },
+          text: "Japan",
         },
         {
-          value: 274.7,
-          text: "KRW",
+          value: {
+            currency: 274.7,
+            label: "KRW",
+          },
+          text: "Korean",
         },
         {
-          value: 0.34,
-          text: "AUD",
+          value: {
+            currency: 0.34,
+            label: "AUD",
+          },
+          text: "Australia",
         },
       ],
       cur_to_selected: null,
@@ -75,7 +91,8 @@ export default {
   methods: {
     calculate() {
       if (this.amount != "") {
-        this.result = (this.amount * this.cur_to_selected).toFixed(2);
+        this.result = (this.amount * this.cur_to_selected.currency).toFixed(2);
+        this.result_currency = this.cur_to_selected.label;
       } else {
         alert("⚠ Enter Some Amount to Proceed");
       }
@@ -84,6 +101,5 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 </style>
